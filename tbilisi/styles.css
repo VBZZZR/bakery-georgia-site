@@ -1,0 +1,517 @@
+/* Бетлеми · The name as a monument (seed 1074910502)
+   Newsprint ground, near-black ink, one accent taken from the crust of a shoti.
+   Every colour and size below is a token; sections only reference tokens. */
+
+:root {
+  --bg: #e8e8e3;
+  --surface: #dcdcd6;
+  --ink: #181715;
+  --muted: #63625c;
+  --accent: #d39b35;          /* shoti crust: only the hot things */
+  --accent-ink: #181715;
+  --field-1: #181715;
+  --field-1-ink: #e8e8e3;
+  --field-1-soft: #aaa9a4;    /* field ink at about 70%, solid so contrast is measurable */
+  --field-1-surface: #2a2926; /* one tone step up from the dark field */
+
+  --font-display: "Unbounded", "Arial Black", sans-serif;
+  --font-text: "Onest", "Noto Sans Georgian", "Helvetica Neue", Arial, sans-serif; /* Noto only for the odd Georgian word */
+  --display-weight: 800;
+  --display-track: -0.03em;
+
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.2rem + 2.2vw, 3.25rem);
+
+  --margin: clamp(1rem, 2.2vw, 2rem);
+  --gutter: clamp(1rem, 2vw, 2rem);
+  --section: clamp(5.5rem, 12vw, 11rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+}
+
+/* Georgian: no Onest, no Unbounded letters. Noto Sans Georgian sets the text and the Georgian letters of
+   the display lines; figures, the lari sign and Latin in display lines still come from Unbounded. */
+html[lang="ka"] {
+  --font-display: "Unbounded", "Noto Sans Georgian", sans-serif;
+  --font-text: "Noto Sans Georgian", "Helvetica Neue", Arial, sans-serif;
+  --display-track: -0.02em;
+}
+.ka-label { font-family: "Noto Sans Georgian", var(--font-text); }
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-text); font-size: var(--step-body); line-height: 1.5;
+  font-kerning: normal; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, p, figure, blockquote, ul, ol, dl, dd, table { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+:target { scroll-margin-top: 1.5rem; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p { max-width: 62ch; text-wrap: pretty; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.nums { font-variant-numeric: tabular-nums; }
+.skip {
+  position: absolute; z-index: 30; left: var(--margin); top: 0.75rem; padding: 0.6rem 1rem 0.65rem;
+  background: var(--accent); color: var(--accent-ink); font-weight: 500; text-decoration: none;
+  transform: translateY(calc(-100% - 1.5rem));
+}
+.skip:focus-visible { transform: none; outline-color: var(--field-1-ink); }
+main:focus { outline: none; }
+.nw { white-space: nowrap; }
+
+/* ---------- type ---------- */
+.display {
+  font-family: var(--font-display); font-weight: var(--display-weight);
+  letter-spacing: var(--display-track); line-height: 0.82; font-kerning: normal;
+  hyphens: none; white-space: nowrap;
+}
+.head {
+  font-family: var(--font-display); font-weight: var(--display-weight);
+  font-size: var(--step-head); line-height: 1; letter-spacing: -0.02em;
+  text-wrap: balance; hyphens: none;
+}
+:lang(ru) .display, :lang(en) .display, :lang(ru) .head, :lang(en) .head { text-transform: uppercase; }
+html[lang="ka"] .head { line-height: 1.12; letter-spacing: 0; }
+html[lang="ka"] .display { line-height: 0.95; }
+.lead { font-size: var(--step-lead); line-height: 1.35; }
+.small { font-size: var(--step-small); line-height: 1.45; }
+.muted { color: var(--muted); }
+
+/* the monuments: sized by measurement in main.js, these are the no-script guesses */
+[data-fit] { display: block; }
+[data-fit] > .fit { display: inline-block; white-space: nowrap; }
+
+.wrap { padding-inline: var(--margin); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+
+/* ---------- controls ---------- */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem;
+  background: var(--accent); color: var(--accent-ink); text-decoration: none; white-space: nowrap;
+  font-family: var(--font-text); font-weight: 500; font-size: 1.1875rem; border-radius: 0;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+.link {
+  text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.22em;
+  text-decoration-thickness: 0.08em; transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.link--on { text-decoration-color: currentColor; }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background-color: var(--field-1-ink); color: var(--ink); }
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+/* ---------- header ---------- */
+.top {
+  position: absolute; z-index: 10; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--gutter);
+  padding: 1.25rem var(--margin) 0; color: var(--field-1-ink);
+}
+.top__mark {
+  font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: -0.01em;
+  font-size: var(--step-small); text-decoration: none;
+}
+:lang(ru) .top__mark, :lang(en) .top__mark { text-transform: uppercase; }
+.top__right { display: flex; align-items: center; gap: clamp(1.25rem, 2.4vw, 2.5rem); }
+.top__left { display: flex; align-items: center; gap: clamp(1.5rem, 3.5vw, 3.5rem); }
+.top__links, .langs { display: flex; gap: clamp(1rem, 1.8vw, 1.75rem); }
+.top__links a, .langs a { font-size: 0.9375rem; font-weight: 500; line-height: 2.75rem; }
+.langs a[aria-current] { text-decoration-color: currentColor; }
+.top__menu { display: none; font-size: 0.9375rem; font-weight: 500; min-height: 2.75rem; touch-action: manipulation; }
+.top__cta { display: none; }
+.sheet { display: none; }
+
+/* ---------- 1. hero: the name on the bottom edge of the rise ---------- */
+.hero {
+  position: relative; height: 100svh; min-height: 34rem; overflow: clip;
+  background: var(--field-1); color: var(--field-1-ink);
+}
+.hero__media { position: absolute; inset: 0; margin: 0; background: #3a3936; }
+.hero__media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%);
+  filter: grayscale(1) contrast(1.05); background: #3a3936;
+}
+.hero__media img + img { opacity: 0; }
+/* neutral legibility scrims: under the navigation and under the bottom band only */
+.hero::before, .hero::after { content: ""; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 1; }
+.hero::before { top: 0; height: 13rem; background: linear-gradient(rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.64) 4.5rem, rgba(0, 0, 0, 0.3) 8.5rem, rgba(0, 0, 0, 0)); } /* taste-skill-ignore: scrim */
+.hero::after { bottom: 0; height: 52%; background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.42) 38%, rgba(0, 0, 0, 0.7)); } /* taste-skill-ignore: scrim */
+.hero__body { position: absolute; z-index: 2; left: var(--margin); right: var(--margin); bottom: var(--hero-foot, 1.1rem); }
+.hero__row { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gutter); margin-bottom: clamp(1rem, 2.2vw, 2rem); }
+.hero__lead { font-size: var(--step-lead); line-height: 1.3; max-width: 64ch; }
+.hero__aside { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; text-align: right; }
+.hero__cap { color: var(--field-1-soft); }
+/* the stop for the changing pictures: shown by main.js only while they change */
+.hero__pause {
+  min-height: 2.75rem; font-size: var(--step-small); font-weight: 500; color: var(--field-1-ink);
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); touch-action: manipulation;
+}
+.hero__pause[hidden] { display: none; }
+.hero__name { font-size: var(--fs, 15.2vw); margin-left: -0.03em; }
+html[lang="ka"] .hero__name { font-size: var(--fs, 21vw); margin-bottom: 0.08em; } /* mkhedruli bowls sit below the line box */
+
+/* ---------- 2. the name: title, note, facts row ---------- */
+.name { padding-block: calc(var(--section) * 0.75) calc(var(--section) * 0.45); }
+.name__top { align-items: end; }
+.name__title { grid-column: 1 / span 6; }
+.name__note { grid-column: 10 / span 3; max-width: 30ch; }
+.facts {
+  display: flex; justify-content: space-between; gap: var(--gutter); margin-top: clamp(3.5rem, 6vw, 5.5rem);
+}
+.fact__big { font-size: var(--step-head); line-height: 1.05; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fact__note { margin-top: 0.6rem; color: var(--muted); max-width: 24ch; }
+.name__plan { grid-column: 6 / span 7; margin-top: clamp(2rem, 3.5vw, 3.5rem); }
+.name__planframe { aspect-ratio: 4 / 3; overflow: clip; background: var(--bg); }
+.name__planframe img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); mix-blend-mode: multiply; filter: grayscale(1) contrast(1.05); background: transparent; }
+.cap { margin-top: 0.75rem; color: var(--muted); font-size: var(--step-small); line-height: 1.45; max-width: 60ch; }
+.name__planrow { align-items: end; }
+.name__planside { grid-column: 1 / span 4; align-self: end; }
+/* desktop: the facts stand in a column beside the plan, so the plan has no empty field on its left */
+@media (min-width: 1081px) {
+  .name { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); }
+  .name__top { grid-column: 1 / -1; }
+  .facts {
+    grid-column: 1 / span 4; grid-row: 2; flex-direction: column; justify-content: space-between; gap: 2rem;
+    margin-top: clamp(4rem, 7vw, 6.5rem);
+  }
+  .name__planrow { grid-column: 6 / -1; grid-row: 2; display: block; margin-top: clamp(4rem, 7vw, 6.5rem); }
+  .name__plan { margin-top: 0; }
+  .name__planside { margin-top: 0.75rem; }
+}
+
+/* ---------- 3. down to the fire: one verb at a time ---------- */
+.oven__intro { padding-block: calc(var(--section) * 0.45) clamp(5rem, 9vw, 8rem); align-items: end; }
+.oven__title { grid-column: 1 / span 6; }
+.oven__text { grid-column: 8 / span 5; }
+.panel {
+  position: relative; height: 100svh; min-height: 32rem; color: var(--field-1-ink); background: var(--field-1); overflow: clip;
+  --foot: clamp(12rem, 30svh, 17rem);
+}
+.panel__media { position: absolute; inset: 0; margin: 0; overflow: clip; }
+/* dimmed enough for the verb, light enough to read the photograph; a very white frame sets its own --dim */
+.panel__media img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); filter: grayscale(1) contrast(1.05) brightness(var(--dim, 0.72)); background: #2a2926; }
+.panel__track { position: absolute; z-index: 2; top: 0; left: 0; right: 0; bottom: var(--foot); }
+/* the verb carries 0.18em of room above it, so the dots of Ё stay inside its own panel while it enters */
+.panel__verb {
+  position: sticky; top: calc(50svh - 0.6 * var(--fs, 15vw)); padding-top: 0.18em;
+  text-align: center; color: var(--field-1-ink); font-size: var(--fs, 15vw); line-height: 0.84;
+}
+html[lang="ka"] .panel__verb { line-height: 1; top: calc(50svh - 0.68 * var(--fs, 15vw)); }
+.panel__foot {
+  position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end;
+  gap: var(--gutter); padding: 0 var(--margin) clamp(1.5rem, 3vw, 2.25rem);
+}
+.panel__foot::before { content: ""; position: absolute; inset: auto 0 0 0; height: 100%; background: rgba(0, 0, 0, 0.36); z-index: -1; pointer-events: none; }
+.panel__say { font-size: var(--step-lead); line-height: 1.32; max-width: 34ch; }
+.panel__cap { color: var(--field-1-ink); text-align: right; max-width: 30ch; }
+
+/* ---------- 4. off the wall: statement, table pushed right ---------- */
+.menu { padding-block: var(--section) calc(var(--section) * 0.5); }
+.menu__title { grid-column: 1 / -1; }
+.menu__body { margin-top: clamp(3.5rem, 6.5vw, 6rem); align-items: end; }
+.menu__photo { grid-column: 1 / span 5; align-self: end; }
+.menu__photo .frame { aspect-ratio: 4 / 5; overflow: clip; background: var(--surface); }
+.menu__photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); filter: grayscale(1) contrast(1.05); }
+.menu__label { grid-column: 7 / span 1; align-self: start; color: var(--muted); padding-top: 0.2rem; }
+.menu__list { grid-column: 8 / span 5; align-self: start; }
+.menu table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.menu td { padding: 0; vertical-align: baseline; }
+.menu tr + tr td { padding-top: 0.95rem; }
+.menu tr.group td { padding-top: 2.4rem; }
+.menu .kind { width: 30%; color: var(--muted); font-size: var(--step-small); }
+.menu .kind--rep { position: relative; }
+.menu .what { padding-right: var(--gutter); }
+.menu .price { text-align: right; white-space: nowrap; }
+.menu__note { grid-column: 8 / span 5; margin-top: 2.5rem; color: var(--muted); max-width: 52ch; }
+@media (min-width: 1081px) {
+  /* the word Menu heads the table on its own left edge; the photograph keeps to the table's height */
+  .menu__label { grid-column: 8 / span 5; grid-row: 1; padding-top: 0; margin-bottom: 1.5rem; }
+  .menu__list { grid-row: 2; }
+  .menu__note { grid-row: 3; }
+  .menu__photo { grid-row: 1 / span 2; }
+}
+.menu__close { grid-column: 1 / -1; margin-top: clamp(2.5rem, 4vw, 3.5rem); max-width: none; }
+
+/* ---------- 5. up to the view: pinned title, places pass ----------
+   The title holds the left half while the five places of the climb pass up the right half, two by two
+   like the flights of a stair; nothing crosses the title. */
+.climb { padding-block: calc(var(--section) * 0.45) var(--section); }
+.climb__grid { align-items: stretch; }
+.climb__side { grid-column: 1 / span 5; }
+/* the title starts at the top of the section beside the first place, then holds a third of the way down */
+.climb__pin {
+  position: sticky; top: 30svh; display: flex; flex-direction: column; gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding-top: clamp(1rem, 4vw, 3.5rem);
+}
+.climb__title { width: 100%; color: var(--ink); line-height: 0.84; font-size: var(--fs, 5.6vw); }
+.climb__title .fit { white-space: nowrap; }
+html[lang="ka"] .climb__title { line-height: 1.02; }
+.climb__intro { max-width: 24ch; }
+.places {
+  grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(6, auto); column-gap: var(--gutter);
+}
+.place:nth-child(odd) { grid-column: 1; }
+.place:nth-child(even) { grid-column: 2; }
+.place:nth-child(1) { grid-row: 1 / span 2; }
+.place:nth-child(2) { grid-row: 2 / span 2; }
+.place:nth-child(3) { grid-row: 3 / span 2; }
+.place:nth-child(4) { grid-row: 4 / span 2; }
+.place:nth-child(5) { grid-row: 5 / span 2; }
+.place figure { padding-bottom: clamp(2rem, 4vw, 3.5rem); }
+.place__frame { aspect-ratio: 4 / 5; overflow: clip; background: var(--surface); }
+.place__frame img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); filter: grayscale(1) contrast(1.05); }
+.place__text { margin-top: 1rem; max-width: 24rem; }
+.place__name { font-family: var(--font-text); font-weight: 500; font-size: var(--step-body); line-height: 1.3; }
+.place__where { color: var(--muted); }
+.place__say { margin-top: 0.5rem; }
+.place__cap { margin-top: 0.5rem; color: var(--muted); }
+
+/* ---------- 6. to you: the address as display type ---------- */
+.reach {
+  position: relative; min-height: min(100svh, 54rem); background: var(--field-1); color: var(--field-1-ink);
+  display: flex; flex-direction: column; padding-top: clamp(4rem, 8vw, 7rem);
+}
+.reach__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2rem; }
+.reach__title { grid-column: 1 / span 7; }
+.live { grid-column: 1 / -1; }
+.live__ask { font-weight: 500; margin-bottom: 1rem; }
+.live__places { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.live__places[hidden] { display: none; }
+.place-btn {
+  touch-action: manipulation; min-height: 3rem; padding: 0 1.25rem; background: var(--field-1-surface); color: var(--field-1-ink);
+  font-weight: 500; transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.place-btn:active { transform: scale(0.97); }
+.place-btn[aria-pressed="true"] { background: var(--field-1-ink); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .place-btn:hover { background: #3a3935; }
+  .place-btn[aria-pressed="true"]:hover { background: var(--field-1-ink); }
+}
+.live__out { margin-top: 1.75rem; font-size: var(--step-lead); line-height: 1.38; max-width: 46ch; min-height: 2.8em; }
+.live__out .hot { color: var(--accent); font-weight: 500; }
+.live__fallback { max-width: 60ch; }
+.js .live__fallback { display: none; }
+/* without script there is no sheet to open and nothing to choose: the button and the question stay out */
+html:not(.js) .top__menu, html:not(.js) .live__ask { display: none !important; }
+.reach__foot { margin-top: auto; padding-top: clamp(4rem, 9vw, 8rem); }
+.reach__addr { color: var(--field-1-ink); text-decoration: none; transition: color var(--t-hover) ease; }
+.reach__addr .display { font-size: var(--fs, 6.4vw); }
+@media (hover: hover) and (pointer: fine) { .reach__addr:hover { color: var(--accent); } }
+.reach__corners { display: flex; justify-content: space-between; gap: var(--gutter); padding: 1.5rem 0 1.75rem; color: var(--field-1-soft); }
+.reach__corners p { line-height: 1.6; }
+.reach__corners .r { text-align: right; }
+.reach__corners a, .reach__corners .contact { color: var(--field-1-ink); }
+.br-narrow { display: none; }
+
+/* ---------- 7. footer: the name first, places under it ---------- */
+.foot { background: var(--field-1); color: var(--field-1-ink); padding-top: clamp(5rem, 10vw, 9rem); }
+.foot__mark { overflow: clip; }
+.foot__mark .display { font-size: var(--fs, 15.2vw); color: var(--field-1-ink); margin-left: -0.03em; margin-bottom: -0.13em; }
+html[lang="ka"] .foot__mark { overflow: visible; }
+html[lang="ka"] .foot__mark .display { font-size: var(--fs, 21vw); margin-bottom: 0; padding-bottom: 0.06em; } /* no cut: ე and ლ hang below the line */
+.foot__row { margin-top: clamp(3rem, 5vw, 4.5rem); align-items: start; }
+.foot__places { grid-column: 1 / span 5; display: grid; gap: 0.4rem; }
+.foot__places a, .foot__places .contact { color: var(--accent); font-size: var(--step-lead); line-height: 1.3; }
+.foot__cols { grid-column: 7 / span 6; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.foot__cols h3 { font-family: var(--font-text); font-weight: 500; font-size: var(--step-small); color: var(--field-1-soft); margin-bottom: 0.6rem; }
+.foot__cols li { font-size: 0.9375rem; line-height: 1.75; }
+.foot__credits { margin-top: clamp(4rem, 7vw, 6rem); color: var(--field-1-soft); }
+.foot__credits h3 { font-family: var(--font-text); font-weight: 500; font-size: var(--step-small); margin-bottom: 0.6rem; }
+.foot__credits ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.35rem var(--gutter); }
+.foot__credits p { margin-top: 1rem; }
+.foot__credits a { color: var(--field-1-ink); }
+.foot__last { display: flex; justify-content: space-between; gap: var(--gutter); padding: 2rem 0 2.25rem; color: var(--field-1-soft); }
+.foot__last a { color: var(--field-1-ink); }
+
+/* ---------- tablet ---------- */
+@media (max-width: 1080px) {
+  .name__title { grid-column: 1 / span 7; }
+  .name__note { grid-column: 9 / span 4; }
+  .facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.5rem; }
+  .name__plan { grid-column: 4 / span 9; }
+  .name__planside { grid-column: 1 / span 3; }
+  .oven__title { grid-column: 1 / span 7; }
+  .oven__text { grid-column: 8 / span 5; }
+  .menu__photo { grid-column: 1 / span 5; align-self: start; position: sticky; top: 2rem; }
+  .menu__label { display: none; }
+  .menu__list, .menu__note { grid-column: 6 / span 7; }
+  .foot__places { grid-column: 1 / -1; }
+  .foot__cols { grid-column: 1 / -1; margin-top: 3rem; }
+  .foot__credits ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .top__links a, .langs a, .foot__cols li { font-size: var(--step-body); }
+  /* the two lines of the lead keep their full measure; the button steps down beside the name instead */
+  .hero__row { flex-wrap: wrap; row-gap: 1rem; }
+  .hero__aside { margin-left: auto; }
+
+  /* the climb unpins: title, line, then the places as rows, the picture changing sides */
+  .climb__side, .places { grid-column: 1 / -1; }
+  .climb__pin { position: static; height: auto; display: block; }
+  .climb__title { font-size: var(--fs, 12vw); }
+  .climb__intro { margin-top: 1.5rem; }
+  .places { display: grid; grid-template-columns: 1fr; grid-template-rows: none; row-gap: clamp(2.5rem, 6vw, 4rem); padding-top: clamp(3rem, 7vw, 4.5rem); }
+  .place:nth-child(n) { grid-column: 1; grid-row: auto; }
+  .place figure { display: grid; grid-template-columns: 5fr 7fr; column-gap: var(--gutter); align-items: start; padding-bottom: 0; }
+  .place:nth-child(even) figure { grid-template-columns: 7fr 5fr; }
+  .place:nth-child(even) .place__frame { order: 2; }
+  .place__text { margin-top: 0; max-width: 34rem; }
+}
+
+/* ---------- phone: its own composition ---------- */
+@media (max-width: 640px) {
+  /* one step smaller on a phone, so the hero's two sentences take two lines each */
+  :root { --step-lead: 1.1875rem; }
+  .top { padding-top: 0.75rem; }
+  .top__mark, .top__links { display: none; }
+  .top__menu { display: inline-block; }
+  .top__right { width: 100%; justify-content: space-between; gap: 1rem; }
+  .top__left { display: flex; align-items: center; gap: 0.8rem; }
+  .top__cta { display: inline-flex; min-height: 2.75rem; padding: 0.2rem 0.85rem; white-space: normal; text-align: center; line-height: 1.1; max-width: 8rem; font-size: var(--step-body); }
+  .top__left { min-width: 0; }
+  .top__links a, .langs a, .top__menu { font-size: var(--step-body); }
+  .hero__media img, .panel__media img { object-position: var(--pos-n, var(--pos, 50% 50%)); }
+  /* the sheet: its close button sits exactly where "Sections" was, the languages close the list */
+  .sheet:not([hidden]) {
+    display: flex; flex-direction: column; position: fixed; inset: 0; z-index: 20; overflow-y: auto; overscroll-behavior: contain;
+    background: var(--field-1); color: var(--field-1-ink); padding: 0.75rem var(--margin) 1.5rem;
+  }
+  .sheet__bar { display: flex; align-items: center; min-height: 2.75rem; }
+  .sheet__close { min-height: 2.75rem; font-size: var(--step-body); font-weight: 500; text-decoration-color: currentColor; touch-action: manipulation; }
+  .sheet__nav ul { margin-top: 2.5rem; display: grid; gap: 0.75rem; }
+  .sheet__nav a {
+    display: inline-block; font-family: var(--font-display); font-weight: var(--display-weight);
+    font-size: 2.25rem; line-height: 1.15; text-decoration: none;
+  }
+  html[lang="ka"] .sheet__nav a { font-size: 1.875rem; line-height: 1.3; }
+  :lang(ru) .sheet__nav a, :lang(en) .sheet__nav a { text-transform: uppercase; }
+  .sheet__langs { margin-top: auto; padding-top: 2.5rem; }
+  .sheet__langs ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+  .sheet__langs a { display: inline-block; font-size: var(--step-lead); font-weight: 500; line-height: 2.75rem; }
+
+  .hero__row { display: block; margin-bottom: 1rem; }
+  /* the button lives in the header on a phone; the aside keeps only the pause, under the lead */
+  .hero__aside { display: none; }
+  .hero--rolls .hero__aside { display: flex; align-items: flex-start; margin-top: 0.15rem; margin-bottom: -0.6rem; }
+  .hero__aside .button { display: none; }
+  .hero__lead { font-size: var(--step-lead); line-height: 1.3; }
+  .hero__body { bottom: var(--hero-foot, 0.9rem); }
+
+  .name__title, .name__note { grid-column: 1 / -1; }
+  .name__note { margin-top: 1.25rem; max-width: none; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; margin-top: 3.5rem; }
+  .fact__big { font-size: 1.625rem; white-space: normal; }
+  html[lang="ka"] .fact__big { font-size: var(--step-lead); }
+  .name__plan { grid-column: 1 / -1; }
+  .name__planside { grid-column: 1 / -1; margin-top: 0.75rem; }
+
+  .oven__title, .oven__text { grid-column: 1 / -1; }
+  .oven__text { margin-top: 1.25rem; }
+  .panel { --foot: clamp(11rem, 34svh, 15rem); }
+  .panel__foot { display: block; }
+  .panel__say { font-size: var(--step-body); max-width: none; }
+  .panel__cap { text-align: left; margin-top: 0.6rem; }
+
+  .menu__photo { grid-column: 6 / -1; order: 3; margin-top: 3rem; position: static; }
+  .menu__list, .menu__note { grid-column: 1 / -1; }
+  .menu table, .menu tbody { display: block; }
+  .menu tr { display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; align-items: baseline; }
+  .menu tr + tr td { padding-top: 0; }
+  .menu tr + tr { margin-top: 0.75rem; }
+  .menu tr.group { margin-top: 2rem; }
+  .menu tr.group td { padding-top: 0; }
+  .menu .kind { grid-column: 1 / -1; width: auto; margin-bottom: 0.25rem; }
+  .menu .kind--rep { position: absolute; margin: 0; }
+  .menu .what { grid-column: 1; padding-right: 0; }
+  .menu .price { grid-column: 2; }
+
+  /* the places: a large picture at one edge, then the other, the words under it at the full measure */
+  .climb { padding-bottom: 4.5rem; }
+  .places { row-gap: 3rem; }
+  .place figure, .place:nth-child(even) figure { display: block; }
+  /* square on a phone: the street views are landscape, and five 4:5 frames would make the climb longer than its stairs */
+  .place__frame { width: 72%; aspect-ratio: 1; }
+  .place:nth-child(even) .place__frame { margin-left: auto; }
+  .place__text { margin-top: 1rem; max-width: none; }
+  .place__say { margin-top: 0.35rem; }
+
+  .reach__title { grid-column: 1 / -1; }
+  .live__places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .live__places[hidden] { display: none; }
+  .place-btn { padding: 0.5rem 0.75rem; min-height: 3rem; text-align: left; line-height: 1.25; }
+  .br-narrow { display: inline; }
+  /* two lines of the address on a phone: the legs of Д keep 4-7px of dark between them and the next
+     line at every width from 320 to 640 (a fixed 4px on top of 0.96, so the small sizes get it too) */
+  html[lang="ru"] .reach__addr .display { line-height: calc(0.96em + 4px); }
+  /* the same for the two-line headings: Д in "Как дойти" over "до тоне" */
+  html[lang="ru"] .head { line-height: 1.06; }
+  .reach__corners { display: grid; gap: 1rem; }
+  .reach__corners .r { text-align: left; }
+
+  .foot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
+  .foot__cols > div:last-child { grid-column: 1 / -1; }
+  .foot__cols li { font-size: var(--step-body); }
+  .foot__credits ul { grid-template-columns: 1fr; }
+  .foot__last { font-size: 0.8125rem; }
+}
+
+/* the narrowest phones (320-389): 390 and up stay exactly as they are */
+@media (max-width: 389.98px) {
+  /* the header keeps the two other languages (the current one is in the sheet) and the button on one line */
+  .langs a[aria-current] { display: none; }
+  .top__left, .langs { gap: 0.65rem; }
+  .top__right { gap: 0.5rem; }
+  .top__cta { flex-shrink: 0; white-space: nowrap; max-width: none; }
+  /* the facts follow the screen down, so "120 ступеней" and 8:00-20:00 keep inside their columns */
+  .fact__big { font-size: clamp(1.25rem, calc((100vw - 3.5rem) / 13), 1.625rem); }
+}
+@media (max-width: 374.98px) {
+  /* თავისუფლების, the longest Georgian word on a button, stays inside its button */
+  html[lang="ka"] .place-btn { font-size: 0.9375rem; padding-inline: 0.6rem; }
+}
+
+@media (max-width: 359px) {
+  .head { font-size: 1.75rem; }
+}
+
+/* ---------- motion: entrances, the crossfade, the drift ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero__name { opacity: 0; transform: translateY(18%); animation: rise 1000ms var(--ease-expo) 120ms forwards; }
+  .js .hero [data-load] { opacity: 0; transform: translateY(14px); animation: rise 600ms var(--ease-out) forwards; animation-delay: var(--d, 420ms); }
+  .js .hero__media img { transition: opacity 1600ms ease; }
+  .js .hero__media img.is-on { opacity: 1; }
+  .js .hero__media img:not(.is-on) { opacity: 0; }
+  .js .hero__media img.is-on { animation: drift 16s var(--ease-soft) both; }
+  .js .hero.is-paused .hero__media img { animation-play-state: paused; transition: none; }
+
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-expo); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+  /* pictures fade in whole while the photograph settles inside its frame */
+  .js .shutter[data-reveal] { transform: none; transition: opacity 700ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js .shutter[data-reveal] img { transform: scale(1.06); transition: transform 1400ms var(--ease-soft); }
+  .js .shutter[data-reveal].is-in img { transform: none; }
+  .js .menu tr[data-reveal] { transform: translateY(12px); }
+  .live__out.is-new { animation: fade-in 420ms var(--ease-out); }
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes drift { from { transform: scale(1.08) translate3d(0, 1.5%, 0); } to { transform: scale(1.0) translate3d(0, 0, 0); } }
+@keyframes fade-in { from { opacity: 0.25; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
