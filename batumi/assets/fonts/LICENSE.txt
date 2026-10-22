@@ -1,0 +1,9 @@
+Fonts in this folder are self-hosted subsets served by Google Fonts (woff2), unchanged.
+
+EB Garamond
+Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12)
+Licensed under the SIL Open Font License, Version 1.1: https://openfontlicense.org
+
+Noto Serif Georgian
+Copyright 2022 The Noto Project Authors (https://github.com/notofonts/georgian)
+Licensed under the SIL Open Font License, Version 1.1: https://openfontlicense.org

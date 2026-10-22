@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Две пекарни в Грузии</title>
+<meta name="description" content="Две выдуманные пекарни: «Бетлеми» у лестницы Бетлеми в Тбилиси и «Цвима», пекарня имени дождя в Батуми.">
+<meta name="theme-color" content="#e8e6e0">
+<style>
+  :root {
+    --bg: #e8e6e0;
+    --ink: #1c1a17;
+    --muted: #6a665e;
+    --tbilisi: #181715;
+    --tbilisi-ink: #e8e8e3;
+    --tbilisi-accent: #d39b35;
+    --batumi: #ecebe6;
+    --batumi-ink: #2a1d17;
+    --batumi-accent: #456f3a;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100svh; display: flex; flex-direction: column;
+    background: var(--bg); color: var(--ink);
+    font-family: "Helvetica Neue", Arial, sans-serif; font-size: 1.0625rem; line-height: 1.5;
+  }
+  header { padding: 2rem 16px 1.5rem; }
+  h1 { margin: 0; font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; }
+  header p { margin: 0.6rem 0 0; color: var(--muted); max-width: 44ch; }
+  main { flex: 1; display: grid; grid-template-columns: 1fr; gap: 16px; padding: 0 16px 16px; }
+  @media (min-width: 760px) {
+    header { padding: 3rem 32px 2rem; }
+    main { grid-template-columns: 1fr 1fr; padding: 0 32px 32px; }
+  }
+  .site { display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; min-height: 22rem; padding: 1.75rem 1.5rem 1.5rem; text-decoration: none; }
+  .site--tbilisi { background: var(--tbilisi); color: var(--tbilisi-ink); }
+  .site--batumi { background: var(--batumi); color: var(--batumi-ink); }
+  .site__city { margin: 0; font-size: 0.9375rem; font-weight: 600; }
+  .site__name { margin: 0.4rem 0 0; font-size: clamp(3rem, 2rem + 6vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; }
+  .site--tbilisi .site__name { font-weight: 900; text-transform: uppercase; }
+  .site--batumi .site__name { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 400; }
+  .site__say { margin: 1rem 0 0; max-width: 32ch; }
+  .site__go { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; }
+  .site__open { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.25rem; font-weight: 600; }
+  .site--tbilisi .site__open { background: var(--tbilisi-accent); color: var(--tbilisi); }
+  .site--batumi .site__open { background: var(--batumi-accent); color: #fff; }
+  .langs { display: flex; gap: 1rem; font-size: 0.9375rem; }
+  .langs a { color: inherit; display: inline-flex; align-items: center; min-height: 2.75rem; text-underline-offset: 0.2em; }
+  footer { padding: 0 16px 2rem; color: var(--muted); font-size: 0.875rem; }
+  @media (min-width: 760px) { footer { padding: 0 32px 2.5rem; } }
+  footer p { margin: 0; max-width: 70ch; }
+  a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Две пекарни в Грузии</h1>
+  <p>Обе выдуманы. Каждый сайт рассказывает, почему пекарня стоит именно здесь. Русский, English, ქართული.</p>
+</header>
+<main>
+  <section class="site site--tbilisi" aria-labelledby="t-name">
+    <div>
+      <p class="site__city">Тбилиси</p>
+      <h2 class="site__name" id="t-name">Бетлеми</h2>
+      <p class="site__say">Пекарня с тоне у нижней ступени лестницы Бетлеми, «дома хлеба». Горячий шоти со стены печи каждые 8 минут.</p>
+    </div>
+    <div class="site__go">
+      <a class="site__open" href="./tbilisi/index.html">Открыть сайт</a>
+      <nav class="langs" aria-label="Языки сайта «Бетлеми»">
+        <a href="./tbilisi/en/index.html" lang="en">English</a>
+        <a href="./tbilisi/ka/index.html" lang="ka">ქართული</a>
+      </nav>
+    </div>
+  </section>
+  <section class="site site--batumi" aria-labelledby="b-name">
+    <div>
+      <p class="site__city">Батуми</p>
+      <h2 class="site__name" id="b-name">Цвима</h2>
+      <p class="site__say">Пекарня имени дождя на улице Мемеда Абашидзе. Окно на сайте показывает, идёт ли в Батуми дождь прямо сейчас.</p>
+    </div>
+    <div class="site__go">
+      <a class="site__open" href="./batumi/index.html">Открыть сайт</a>
+      <nav class="langs" aria-label="Языки сайта «Цвима»">
+        <a href="./batumi/en/index.html" lang="en">English</a>
+        <a href="./batumi/ka/index.html" lang="ka">ქართული</a>
+      </nav>
+    </div>
+  </section>
+</main>
+<footer>
+  <p>Пекарни, контакты и цены выдуманы. Фотографии взяты с Wikimedia Commons, авторы и лицензии указаны внизу каждого сайта.</p>
+</footer>
+</body>
+</html>

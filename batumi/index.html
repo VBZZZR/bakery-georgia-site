@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Цвима — пекарня имени дождя в Батуми</title>
+<meta name="description" content="Пекарня в Старом Батуми, на улице Мемеда Абашидзе. Аджарули из дровяной печи, хлеб, батумская пахлава, кофе на песке. Каждый день с 8 до 21.">
+<meta name="theme-color" content="#e5e1d8">
+<link rel="alternate" hreflang="ru" href="index.html">
+<link rel="alternate" hreflang="en" href="en/index.html">
+<link rel="alternate" hreflang="ka" href="ka/index.html">
+<link rel="alternate" hreflang="x-default" href="index.html">
+<link rel="preload" href="assets/fonts/eb-garamond-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/eb-garamond-italic-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#about">Перейти к содержанию</a>
+<main>
+  <div class="stage">
+    <div class="opening">
+      <header class="card" id="top">
+        <div class="awning" aria-hidden="true"></div>
+        <nav class="langs" aria-label="Язык">
+          <a href="index.html" hreflang="ru" lang="ru" title="Русский" aria-current="page">RU</a>
+          <a href="en/index.html" hreflang="en" lang="en" title="English">EN</a>
+          <a href="ka/index.html" hreflang="ka" lang="ka" title="ქართული">ქა</a>
+        </nav>
+        <div class="card__body">
+          <p class="wordmark" translate="no" data-load style="--d:0ms">Цвима</p>
+          <p class="wordmark-ka" lang="ka" translate="no" data-load style="--d:120ms">წვიმა</p>
+          <h1 class="title"><span class="line"><span style="--i:0">Батумская пекарня</span></span> <span class="line"><span style="--i:1">имени дождя</span></span></h1>
+          <p class="lede" data-load style="--d:420ms">Цвима по-грузински значит «дождь». Печём аджарули, хлеб и пахлаву в дровяной печи на улице Мемеда Абашидзе в Старом Батуми, каждый день с 8 до 21.</p>
+          <a class="button" href="#visit" data-load style="--d:520ms">Как дойти</a>
+        </div>
+        <nav class="card__links" aria-label="Разделы">
+          <a class="link" href="#menu">Меню</a>
+          <a class="link" href="#rain">Если дождь</a>
+          <a class="link" href="#street">Улица</a>
+        </nav>
+      </header>
+
+      <aside class="window" aria-label="Окно Цвимы">
+        <figure class="layer layer--live is-on" data-layer="live">
+          <img src="assets/batumi-rain-2011.jpg" srcset="assets/batumi-rain-2011-960.jpg 960w, assets/batumi-rain-2011.jpg 1920w" sizes="(min-width: 1000px) 151vh, 100vw" width="1920" height="1273" alt="Приморский бульвар Батуми в дождь: мокрая плитка, пальмы, фонари и сизое море" decoding="async" class="layer__media shot shot--rain" fetchpriority="high">
+          <img src="assets/abashidze-street-batumi.jpg" srcset="assets/abashidze-street-batumi-960.jpg 960w, assets/abashidze-street-batumi.jpg 1920w" sizes="(min-width: 1000px) 134vh, 100vw" width="1920" height="1440" alt="Улица Мемеда Абашидзе в солнечный день: дома начала XX века и пальмы" decoding="async" class="layer__media shot shot--dry" loading="lazy" aria-hidden="true">
+          <figcaption class="plate plate--live"><span class="plate__text" aria-live="polite" data-rain="Сейчас в Батуми дождь, {t}. Кофе по-батумски к аджарули — за наш счёт." data-dry="Сейчас в Батуми сухо, {t}. Аджарули горячее, до моря пять минут.">В Батуми дождь идёт 139 дней в году. В каждый из них кофе к аджарули за наш счёт.</span></figcaption>
+        </figure>
+        <figure class="layer layer--clouds" data-layer="clouds" aria-hidden="true">
+          <img src="assets/rainy-day-in-batumi.jpg" width="1920" height="1282" alt="Батуми под низкими тучами: порт, корабль на рейде, горы Аджарии в облаках" decoding="async" class="layer__media" loading="lazy">
+          <figcaption class="plate">Тучи легли на горы Аджарии. Батуми, ноябрь</figcaption>
+        </figure>
+        <figure class="layer layer--tea" data-layer="tea" aria-hidden="true">
+          <img src="assets/chakva-tea-harvest.jpg" srcset="assets/chakva-tea-harvest-960.jpg 960w, assets/chakva-tea-harvest.jpg 1920w" sizes="(min-width: 1000px) 121vh, 100vw" width="1920" height="1588" alt="Женщины собирают чай на холмистой плантации в Чакви, ряды кустов и тонкие деревья на гребне" decoding="async" class="layer__media" loading="lazy">
+          <figcaption class="plate">Сбор чая в Чакви под Батуми, 1905–1915. Фото С. М. Прокудина-Горского</figcaption>
+        </figure>
+        <figure class="layer layer--sparrows" data-layer="sparrows" aria-hidden="true">
+          <video class="layer__media" muted loop playsinline preload="none" poster="assets/sparrows-bathing-batumi-poster.jpg" width="854" height="480" aria-hidden="true" data-clip><source src="assets/sparrows-bathing-batumi.webm" type="video/webm"><source src="assets/sparrows-bathing-batumi.mp4" type="video/mp4"></video>
+          <figcaption class="plate plate--clip"><span>Воробьи купаются в луже. Батуми</span> <button class="clip-toggle" type="button" tabindex="-1" data-pause="Пауза" data-play="Смотреть" hidden>Пауза</button></figcaption>
+        </figure>
+        <figure class="layer layer--map" data-layer="map" aria-hidden="true">
+          <img src="assets/batum-plan-1913.jpg" width="900" height="752" alt="Старый цветной план Батума: кирпично-красные кварталы, бульвар вдоль Чёрного моря, озеро Нурие-Гель и маяк на мысу" decoding="async" class="layer__media" loading="lazy">
+          <svg class="marker" viewBox="0 0 900 752" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><circle cx="420" cy="412" r="14" fill="#456f3a"/><circle cx="420" cy="412" r="5" fill="#ecebe6"/><text x="446" y="421" class="marker__label marker__label--it">Цвима</text></svg>
+          <figcaption class="plate">План г. Батума из путеводителя Г. Москвича, 1913. Мариинский проспект теперь улица Мемеда Абашидзе</figcaption>
+        </figure>
+      </aside>
+    </div>
+
+    <div class="column">
+      <section class="chapter about" id="about" data-scene="clouds">
+        <h2 data-reveal>Цвима значит «дождь»</h2>
+        <figure class="pane">
+          <div class="pane__frame shutter" data-reveal><img src="assets/rainy-day-in-batumi.jpg" width="1920" height="1282" alt="Батуми под низкими тучами: порт, корабль на рейде, горы Аджарии в облаках" decoding="async" loading="lazy"></div>
+          <figcaption>Тучи легли на горы Аджарии. Батуми, ноябрь</figcaption>
+        </figure>
+        <div class="measure about__text">
+          <p class="strong" data-reveal style="--i:1">В Батуми за год выпадает около 2 500 мм дождя, почти впятеро больше, чем в Тбилиси. Дождливых дней в году 139.</p>
+          <p data-reveal style="--i:2">Причину видно из окна. Влажный воздух с моря упирается в горы Аджарии сразу за городом и проливается на бульвар, порт и наши крыши.</p>
+          <p data-reveal style="--i:3">Тот же дождь растит чай в Чакви, мандарины в садах и траву на горных пастбищах, откуда к нам приходят сыр и масло.</p>
+          <p data-reveal style="--i:4">Поэтому пекарню мы назвали так, как здесь чаще всего называют погоду. Печь горячая в любой день, и у окна всегда найдётся место.</p>
+        </div>
+        <figure class="rainfall" data-months="Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь" data-template="{m}: {mm} мм, {d} дождливых дней">
+          <p class="rainfall__now" aria-live="polite">Сентябрь: 330 мм, самый дождливый месяц</p>
+          <div class="bars" aria-hidden="true"><div class="bar" style="--mm:235;--n:0"><i></i><span>Янв</span></div><div class="bar" style="--mm:183;--n:1"><i></i><span>Фев</span></div><div class="bar" style="--mm:157;--n:2"><i></i><span>Мар</span></div><div class="bar" style="--mm:90;--n:3"><i></i><span>Апр</span></div><div class="bar" style="--mm:93;--n:4"><i></i><span>Май</span></div><div class="bar" style="--mm:141;--n:5"><i></i><span>Июн</span></div><div class="bar" style="--mm:165;--n:6"><i></i><span>Июл</span></div><div class="bar" style="--mm:221;--n:7"><i></i><span>Авг</span></div><div class="bar is-now" style="--mm:330;--n:8"><i></i><span>Сен</span></div><div class="bar" style="--mm:322;--n:9"><i></i><span>Окт</span></div><div class="bar" style="--mm:306;--n:10"><i></i><span>Ноя</span></div><div class="bar" style="--mm:278;--n:11"><i></i><span>Дек</span></div></div>
+          <div class="sr-wrap"><table class="sr-only"><caption>Дождь в Батуми по месяцам, мм. Больше всего воды в сентябре, чаще всего льёт в январе: 14 дней из 31. Самый сухой месяц апрель, 90 мм. Средние за 1981–2010 годы, дни округлены до целых. Метеостанция аэропорта Батуми.</caption><thead><tr><th scope="col">Месяц</th><th scope="col">Осадки, мм</th><th scope="col">Дней с дождём</th></tr></thead><tbody><tr><th scope="row">Январь</th><td>235</td><td>14</td></tr><tr><th scope="row">Февраль</th><td>183</td><td>13</td></tr><tr><th scope="row">Март</th><td>157</td><td>13</td></tr><tr><th scope="row">Апрель</th><td>90</td><td>10</td></tr><tr><th scope="row">Май</th><td>93</td><td>10</td></tr><tr><th scope="row">Июнь</th><td>141</td><td>10</td></tr><tr><th scope="row">Июль</th><td>165</td><td>10</td></tr><tr><th scope="row">Август</th><td>221</td><td>12</td></tr><tr><th scope="row">Сентябрь</th><td>330</td><td>11</td></tr><tr><th scope="row">Октябрь</th><td>322</td><td>12</td></tr><tr><th scope="row">Ноябрь</th><td>306</td><td>12</td></tr><tr><th scope="row">Декабрь</th><td>278</td><td>13</td></tr></tbody></table></div>
+          <figcaption>Дождь в Батуми по месяцам, мм. Больше всего воды в сентябре, чаще всего льёт в январе: 14 дней из 31. Самый сухой месяц апрель, 90 мм. Средние за 1981–2010 годы, дни округлены до целых. Метеостанция аэропорта Батуми.</figcaption>
+        </figure>
+      </section>
+
+      <section class="menu" id="menu" data-scene="tea">
+        <div class="sheet">
+          <h2 data-reveal>Что вырастил дождь</h2>
+          <p class="sheet__note" data-reveal style="--i:1">Чай, мандарины, трава под сыр и масло растут здесь на дожде. Цены в лари.</p>
+      <div class="group" data-reveal>
+        <h3>Здесь, горячим</h3>
+        <ul class="dishes">
+          <li><span class="dish">Аджарули малое</span><span class="price">14&nbsp;₾</span><span class="desc">Лодка из теста с имерули и сулугуни, один желток, кусок масла</span></li>
+          <li><span class="dish">Аджарули большое</span><span class="price">22&nbsp;₾</span><span class="desc">На двоих: два желтка и двойное масло</span></li>
+          <li><span class="dish">Аджарули с фасолью</span><span class="price">12&nbsp;₾</span><span class="desc">Постное: лобио с луком и кинзой вместо сыра, без яйца</span></li>
+          <li><span class="dish">Ачма</span><span class="price">8&nbsp;₾</span><span class="desc">Слои отварного теста с сыром и маслом, кусок с противня</span></li>
+          <li><span class="dish">Синори</span><span class="price">12&nbsp;₾</span><span class="desc">Тонкое тесто рулетом с надуги, мацони, топлёным маслом и чесноком</span></li>
+        </ul>
+      </div>
+      <div class="group" data-reveal>
+        <h3>Из печи с собой</h3>
+        <ul class="dishes">
+          <li><span class="dish">Пури из дровяной печи</span><span class="price">2&nbsp;₾</span><span class="desc">Белый подовый хлеб с тёмной коркой от дров</span></li>
+          <li><span class="dish">Мчади</span><span class="price">2&nbsp;₾</span><span class="desc">Кукурузная лепёшка. С такой лазы едят хамсу</span></li>
+          <li><span class="dish">Лобиани</span><span class="price">5&nbsp;₾</span><span class="desc">Круглый пирог с пряной фасолью</span></li>
+          <li><span class="dish">Пеновани</span><span class="price">5&nbsp;₾</span><span class="desc">Слоёный хачапури с сыром, конвертом</span></li>
+          <li><span class="dish">Имерули целый</span><span class="price">10&nbsp;₾</span><span class="desc">Круглый хачапури с имеретинским сыром, на четверых</span></li>
+        </ul>
+      </div>
+      <div class="group" data-reveal>
+        <h3>Сладкое</h3>
+        <ul class="dishes">
+          <li><span class="dish">Пахлава по-батумски</span><span class="price">4&nbsp;₾</span><span class="desc">Медовая, с грецким орехом. В Батуми её любят сладкой, в Кобулети хрустящей</span></li>
+          <li><span class="dish">Пахлава, коробка из 12</span><span class="price">44&nbsp;₾</span><span class="desc">Сложим в дорогу</span></li>
+          <li><span class="dish">Мандариновый пирог</span><span class="price">6&nbsp;₾</span><span class="desc">С ноября по январь, пока в Аджарии собирают мандарины</span></li>
+        </ul>
+      </div>
+      <div class="group" data-reveal>
+        <h3>Пить</h3>
+        <ul class="dishes">
+          <li><span class="dish">Кофе по-батумски</span><span class="price">5&nbsp;₾</span><span class="desc">Варим в джезве на горячем песке. В дождь к аджарули бесплатно</span></li>
+          <li><span class="dish">Чай из Чакви</span><span class="price">6&nbsp;₾</span><span class="desc">Чайник на двоих. Первые чайные сады под Батуми заложили в 1885 году</span></li>
+          <li><span class="dish">Компот из фейхоа</span><span class="price">4&nbsp;₾</span><span class="desc">Из аджарской фейхоа, сварен осенью</span></li>
+        </ul>
+        <figure class="inset" data-reveal style="--i:1">
+          <div class="inset__frame"><img src="assets/lau-jen-jau-chakva.jpg" width="480" height="437" alt="Мужчина в длинном халате и синем жилете стоит среди молодых чайных кустов, позади бамбук" decoding="async" loading="lazy"></div>
+          <figcaption>Лау Джен Джау, чайный мастер из Китая, в Чакви. Фото С. М. Прокудина-Горского</figcaption>
+        </figure>
+      </div>
+          <p class="sheet__hours" data-reveal>Каждый день с 8:00 до 21:00<br>Аджарули с 9:00 до 20:30</p>
+        </div>
+        <figure class="pane">
+          <div class="pane__frame shutter" data-reveal><img src="assets/chakva-tea-harvest.jpg" srcset="assets/chakva-tea-harvest-960.jpg 960w, assets/chakva-tea-harvest.jpg 1920w" sizes="(min-width: 1000px) 121vh, 100vw" width="1920" height="1588" alt="Женщины собирают чай на холмистой плантации в Чакви, ряды кустов и тонкие деревья на гребне" decoding="async" loading="lazy"></div>
+          <figcaption>Сбор чая в Чакви под Батуми, 1905–1915. Фото С. М. Прокудина-Горского</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter rain" id="rain" data-scene="sparrows">
+        <h2 data-reveal>Если пошёл дождь</h2>
+        <figure class="pane">
+          <div class="pane__frame shutter" data-reveal><video class="pane__video" muted loop playsinline preload="none" poster="assets/sparrows-bathing-batumi-poster.jpg" width="854" height="480" aria-hidden="true" data-clip><source src="assets/sparrows-bathing-batumi.webm" type="video/webm"><source src="assets/sparrows-bathing-batumi.mp4" type="video/mp4"></video></div>
+          <figcaption class="pane__clip"><span>Воробьи купаются в луже. Батуми</span> <button class="clip-toggle" type="button" data-pause="Пауза" data-play="Смотреть" hidden>Пауза</button></figcaption>
+        </figure>
+        <p class="rain__text" data-reveal style="--i:1">Аджарули не носят с собой: его едят горячим, пока желток жидкий и сыр тянется. Для этого у окна стоит длинный стол. Пока над Батуми дождь, кофе по-батумски к аджарули за наш счёт.</p>
+        <div class="slip" data-reveal style="--i:2">
+          <p class="slip__head">Цвима. Чек на дождь</p>
+          <h3>Как вошли</h3>
+          <ul>
+            <li class="row" style="--n:0"><span class="row__what">Зонт в стойку, место у окна</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">1 мин</span></li>
+            <li class="row" style="--n:1"><span class="row__what">Аджарули в дровяной печи</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">12 мин</span></li>
+            <li class="row" style="--n:2"><span class="row__what">Кофе на горячем песке, пока печётся</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">(4 мин)</span></li>
+          </ul>
+          <h3>Когда принесли</h3>
+          <ul>
+            <li class="row" style="--n:3"><span class="row__what">Вмешать желток и масло в сыр</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">1 мин</span></li>
+            <li class="row" style="--n:4"><span class="row__what">Отрывать края лодки и макать</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">10 мин</span></li>
+            <li class="row" style="--n:5"><span class="row__what">Доесть дно, оно самое мягкое</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">3 мин</span></li>
+          </ul>
+          <h3>Когда дождь кончился</h3>
+          <ul>
+            <li class="row" style="--n:6"><span class="row__what">До бульвара пешком</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">5 мин</span></li>
+          </ul>
+          <p class="row row--total" style="--n:7"><span class="row__what">Сыты, сухи и у моря</span><i class="row__dots" aria-hidden="true"></i><span class="row__time">32 мин</span></p>
+        </div>
+        <p class="rain__legend" data-reveal style="--i:3">По легенде, аджарули придумали лазы-лодочники: лодка из теста, а в ней солнце, которое садится в море.</p>
+      </section>
+
+      <section class="chapter street" id="street" data-scene="map">
+        <h2 data-reveal>Улица десяти имён</h2>
+        <figure class="pane">
+          <div class="pane__frame shutter" data-reveal><img src="assets/batum-plan-1913.jpg" width="900" height="752" alt="Старый цветной план Батума: кирпично-красные кварталы, бульвар вдоль Чёрного моря, озеро Нурие-Гель и маяк на мысу" decoding="async" loading="lazy"><svg class="marker" viewBox="0 0 900 752" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><circle cx="420" cy="412" r="14" fill="#456f3a"/><circle cx="420" cy="412" r="5" fill="#ecebe6"/><text x="446" y="421" class="marker__label marker__label--it">Цвима</text></svg></div>
+          <figcaption>План г. Батума из путеводителя Г. Москвича, 1913. Мариинский проспект теперь улица Мемеда Абашидзе</figcaption>
+        </figure>
+        <p class="measure street__intro" data-reveal style="--i:1">Мы стоим на улице Мемеда Абашидзе, главной улице Старого Батуми с начала XX века. С каждой новой властью город давал ей новое имя:</p>
+        <div class="street__names">
+          <ol class="names" role="list" data-reveal-list><li style="--i:0">Рум Сохас</li><li style="--i:1">Нурие Сохас</li><li style="--i:2">Султан Селим</li><li style="--i:3">Мариинская</li><li style="--i:4">Коминтерна</li><li style="--i:5">III Интернационала</li><li style="--i:6">Красной армии</li><li style="--i:7">Сталина</li><li style="--i:8">Октябрьская</li><li style="--i:9">Свободы</li></ol>
+          <figure class="postcard" data-reveal style="--i:2">
+            <div class="postcard__frame"><img src="assets/batum-lighthouse-postcard.jpg" width="480" height="755" alt="Белая башня маяка с галереей наверху, у подножия люди, чёрно-белая открытка" decoding="async" loading="lazy"></div>
+            <figcaption>Маяк в конце бульвара, на старой открытке</figcaption>
+          </figure>
+        </div>
+        <p class="measure street__after" data-reveal>Теперь она названа в честь Мемеда Абашидзе, батумского писателя и общественного деятеля (1873–1937). На плане 1913 года это ещё Мариинский проспект, а бульвар у моря зовётся Бульваром Цесаревича. От нашей двери до него пять минут.</p>
+        <p class="statement" data-reveal style="--i:1">Имён у улицы было десять. У здешней погоды одно — цвима.</p>
+      </section>
+    </div>
+  </div>
+
+  <section class="visit" id="visit">
+    <div class="visit__top">
+      <h2 data-reveal>Как дойти</h2>
+      <p data-reveal style="--i:1">Заходите переждать дождь. Или просто так, к горячему аджарули.</p>
+    </div>
+    <ol class="route" role="list">
+      <li data-reveal style="--i:2"><strong class="route__from">С бульвара</strong> От Приморского бульвара пять минут пешком вглубь Старого Батуми.</li>
+      <li data-reveal style="--i:3"><strong class="route__from">По улице</strong> Улица Мемеда Абашидзе, на плане 1913 года Мариинский проспект. Дом 23.</li>
+      <li data-reveal style="--i:4"><strong class="route__from">У двери</strong> Навес в шоколадную и белую полоску. Зонт оставьте в стойке у входа.</li>
+    </ol>
+    <p class="address" data-reveal style="--i:2"><span class="address__fit" data-fit><span class="address__part">Мемеда Абашидзе,</span> <span class="address__part">23</span></span></p>
+    <p class="visit__map" data-reveal style="--i:3"><a class="link link--on" href="https://www.openstreetmap.org/search?query=Memed%20Abashidze%20Street%2023%2C%20Batumi">Открыть на карте</a></p>
+    <div class="visit__foot">
+      <p><span class="contact">+995 XXX XX XX XX</span><br>Старый Батуми, Грузия</p>
+      <p>Каждый день 8:00–21:00<br><span class="contact">hello@tsvima.example</span><br><span class="contact">Instagram</span></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__awning" aria-hidden="true"></div>
+  <div class="foot__line">
+    <p class="foot__what">Цвима, пекарня имени дождя</p>
+    <nav class="foot__nav" aria-label="Разделы">
+      <a class="link" href="#menu">Меню</a>
+      <a class="link" href="#rain">Если дождь</a>
+      <a class="link" href="#street">Улица</a>
+      <a class="link" href="#visit">Как дойти</a>
+    </nav>
+    <p class="foot__end">© 2026 Цвима<a class="link" href="#credits">Фото</a></p>
+  </div>
+  <p class="credits" id="credits">Фото и видео через Wikimedia Commons: Roberto Strauss, <a href="https://commons.wikimedia.org/wiki/File:Batumi,_rain_2011_(10600678683).jpg" lang="en">«Batumi, rain 2011»</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>; tjabeljan, <a href="https://commons.wikimedia.org/wiki/File:Abashidze_Street,_Batumi.jpg" lang="en">«Abashidze Street, Batumi»</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; Wojciech Biegun, <a href="https://commons.wikimedia.org/wiki/File:Rainy_day_in_Batumi_-_panoramio.jpg" lang="en">«Rainy day in Batumi»</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>; С. М. Прокудин-Горский, Чакви, 1905–1915 (<a href="https://commons.wikimedia.org/wiki/File:Harvesting_tea_in_Chakva.jpg" lang="en">«Harvesting tea in Chakva»</a>, <a href="https://commons.wikimedia.org/wiki/File:Gorskii_04429u.jpg" lang="en">«Gorskii 04429u»</a>), общественное достояние (Библиотека Конгресса США); <a href="https://commons.wikimedia.org/wiki/File:Batum_map_(Moskvich,_1913).JPG">план г. Батума из путеводителя Г. Москвича, 1913</a>, общественное достояние; Sosotedrd, <a href="https://commons.wikimedia.org/wiki/File:Lighthouse_of_Batumi_-_1883.jpg" lang="en">«Lighthouse of Batumi - 1883»</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> (рамка скана обрезана, показано в ч/б); Vikram2784, <a href="https://commons.wikimedia.org/wiki/File:Sparrows_bathing.ogv" lang="en">«Sparrows bathing»</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.</p>
+</footer>
+<script src="main.js" defer></script>
+</body>
+</html>

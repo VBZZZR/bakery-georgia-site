@@ -1,0 +1,421 @@
+/* Цвима, Батуми. One stylesheet for ru, en and ka.
+   Direction: The split stage (seed 333693740). Type: EB Garamond, with Noto Serif Georgian for Georgian.
+   Colour: Bone, green, chocolate. Square corners everywhere. */
+
+/* ---------- fonts (self-hosted, SIL Open Font License; see assets/fonts/LICENSE.txt) ---------- */
+@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/eb-garamond-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/eb-garamond-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "EB Garamond"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/eb-garamond-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url("assets/fonts/eb-garamond-italic-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url("assets/fonts/eb-garamond-italic-cyrillic.woff2") format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Noto Serif Georgian"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/noto-serif-georgian-georgian.woff2") format("woff2"); unicode-range: U+0589, U+10A0-10FF, U+1C90-1CBA, U+1CBD-1CBF, U+205A, U+2D00-2D2F, U+2E31; }
+@font-face { font-family: "Noto Serif Georgian"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/noto-serif-georgian-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Noto Serif Georgian"; font-style: normal; font-weight: 400 500; font-display: swap; src: url("assets/fonts/noto-serif-georgian-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ---------- tokens ---------- */
+:root {
+  --bg: #e5e1d8;          /* bone: the page and the reading column */
+  --surface: #dad5ca;     /* one tone step down: the ground under the menu sheet */
+  --paper: #ecebe6;       /* one step up: the card, the menu sheet, the receipt */
+  --ink: #2a1d17;         /* chocolate */
+  --muted: #6b5b51;
+  --accent: #456f3a;      /* wet magnolia leaves, Chakvi tea */
+  --accent-ink: #ffffff;
+  --accent-strong: #3a5f31;
+
+  --font: "EB Garamond", "Noto Serif Georgian", Georgia, serif;
+  --font-ka: "Noto Serif Georgian", "EB Garamond", Georgia, serif;
+
+  /* five steps: small, body, lead, head, display */
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+  --step-display: clamp(4.25rem, 2rem + 6vw, 7.5rem);
+
+  --margin: 16px;                              /* one pair of outer margins, every width */
+  --pad: clamp(1.25rem, 4.4vw, 4rem);          /* inside the reading column */
+  --section: clamp(4.5rem, 3rem + 6vw, 8.5rem); /* top and bottom of each chapter */
+  --window-h: calc(100svh - 2 * var(--margin));
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 300ms;
+  --t-reveal: 800ms;
+  --t-fade: 1600ms;    /* the slow crossfade of the window */
+
+  /* the awning: chocolate and paper bars, 28px each. The tile is 14 paper / 28 chocolate / 14 paper and is
+     repeated with `round`, so every bar is whole and both ends close on the same paper half-bar */
+  --stripe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='8' preserveAspectRatio='none'%3E%3Crect x='14' width='28' height='8' fill='%232a1d17'/%3E%3C/svg%3E");
+}
+/* Georgian is set in Noto Serif Georgian, a little smaller so it sits at the size of the Garamond */
+html[lang="ka"] {
+  --font: var(--font-ka);
+  --step-body: clamp(1.0625rem, 1rem + 0.22vw, 1.1875rem);
+  --step-lead: clamp(1.125rem, 1rem + 0.55vw, 1.4375rem);
+  --step-head: clamp(1.75rem, 1.1rem + 2vw, 2.625rem);
+  --step-display: clamp(3.75rem, 1.8rem + 5vw, 6.25rem);
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background: var(--bg); font-synthesis: none; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: var(--step-body); line-height: 1.5; font-kerning: normal; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+h1, h2, h3, p, figure, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1, h2, h3 { font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance; }
+p { text-wrap: pretty; }
+img, video, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration-thickness: 0.06em; text-underline-offset: 0.18em; }
+a, button { touch-action: manipulation; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+.skip { position: absolute; z-index: 10; left: var(--margin); top: var(--margin); padding: 0.6rem 1rem 0.65rem; background: var(--ink); color: var(--paper); font-size: var(--step-small); text-decoration: none; transform: translateY(calc(-100% - 2 * var(--margin))); }
+.skip:focus-visible { transform: none; outline-color: var(--accent); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.sr-wrap { position: relative; height: 0; overflow: clip; }
+[lang="ka"] { font-style: normal; }
+.num { font-variant-numeric: lining-nums tabular-nums; }
+
+/* links that answer the pointer */
+.link { text-decoration-line: underline; text-decoration-color: transparent; transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease; }
+.link--on { text-decoration-color: currentColor; }
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-color: currentColor; }
+  .link--on:hover { text-decoration-color: transparent; }
+}
+
+/* the one button: square, flat green; on hover the awning slides in along its top */
+.button {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  min-height: 3.25rem; padding: 0.15rem 1.9rem 0; background: var(--accent); color: var(--accent-ink);
+  font-size: var(--step-body); text-decoration: none; overflow: clip; white-space: nowrap;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+}
+.button::before { content: ""; position: absolute; inset: 0 0 auto; height: 8px; background: var(--paper) var(--stripe) left top / 56px 100% round; transform: scaleY(0); transform-origin: top; transition: transform var(--t-ui) var(--ease-out); }
+.button:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background-color: var(--accent-strong); }
+  .button:hover::before { transform: none; }
+}
+.button:focus-visible::before { transform: none; }
+
+/* ---------- the stage: a reading column beside a window that never moves ---------- */
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--margin); padding: var(--margin); }
+.opening { display: contents; }
+.card { grid-column: 1; grid-row: 1; }
+.column { grid-column: 1; grid-row: 2; }
+.window { grid-column: 2; grid-row: 1 / span 2; align-self: start; position: sticky; top: var(--margin); height: var(--window-h); }
+
+/* ---------- the card ---------- */
+.card { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: var(--window-h); background: var(--paper); text-align: center; }
+.awning { flex: none; height: 56px; background: var(--paper) var(--stripe) left top / 56px 100% round; }
+.langs { display: flex; justify-content: flex-end; gap: 4px; padding: 10px calc(var(--pad) - 10px) 0; font-size: var(--step-small); }
+.langs a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 10px; text-decoration-line: underline; text-decoration-color: transparent; transition: text-decoration-color var(--t-hover) ease; }
+.langs a[aria-current] { font-weight: 500; text-decoration-color: currentColor; }
+@media (hover: hover) and (pointer: fine) { .langs a:hover { text-decoration-color: currentColor; } }
+.card__body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px var(--pad) 40px; }
+.wordmark { font-size: var(--step-display); font-style: italic; line-height: 0.92; letter-spacing: -0.015em; }
+.wordmark-ka { margin-top: 0.35rem; font-size: var(--step-lead); line-height: 1.2; color: var(--muted); }
+html[lang="ka"] .wordmark { font-style: normal; letter-spacing: 0; }
+.title { margin-top: clamp(1.75rem, 3.2vw, 2.75rem); font-size: var(--step-head); max-width: 13em; }
+.title .line { display: block; }
+.lede { margin-top: 1.5rem; max-width: 50ch; }
+.card__body .button { margin-top: 2rem; }
+.card__links { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; padding: 0 var(--pad) 22px; font-size: var(--step-small); }
+.card__links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px; }
+
+/* ---------- the window ---------- */
+.window { overflow: clip; background: var(--surface); }
+/* the incoming picture fades in over the outgoing one, which stays put until it is covered */
+.layer { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity 0s linear var(--t-fade), visibility 0s linear var(--t-fade); }
+.layer.is-on { z-index: 1; opacity: 1; visibility: visible; transition: opacity var(--t-fade) var(--ease-in-out), visibility 0s; }
+.layer__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--surface); }
+.shot { transition: opacity var(--t-fade) var(--ease-in-out); }
+.shot--dry { opacity: 0; }
+.layer[data-weather="dry"] .shot--dry { opacity: 1; }
+.layer[data-weather="dry"] .shot--rain { opacity: 0; }
+.shot--rain { object-position: 20% 50%; }
+.shot--dry { object-position: 30% 50%; }
+.layer--clouds .layer__media { object-position: 38% 50%; }
+.layer--tea .layer__media { object-position: 45% 50%; }
+.layer--map .layer__media { object-position: 50% 50%; }
+.layer--sparrows { background: var(--accent); }
+.layer--sparrows .layer__media { top: 50%; bottom: auto; height: auto; aspect-ratio: 854 / 480; translate: 0 -50%; }
+.marker { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.marker__label { font-size: 34px; fill: var(--ink); stroke: var(--paper); stroke-width: 8px; stroke-linejoin: round; paint-order: stroke; }
+.marker__label--it { font-style: italic; }
+.layer:not(.is-on) .plate { visibility: hidden; }
+.plate { position: absolute; left: var(--margin); bottom: var(--margin); max-width: calc(100% - 2 * var(--margin)); margin: 0; padding: 0.8rem 1.1rem 0.85rem; background: var(--bg); color: var(--ink); font-size: var(--step-small); line-height: 1.4; }
+.plate--live { max-width: min(25em, calc(100% - 2 * var(--margin))); padding: 1rem 1.25rem 1.1rem; font-size: var(--step-lead); line-height: 1.3; }
+.plate__text { display: block; transition: opacity 500ms ease; }
+
+/* the clip loops, so its caption carries a real pause button: one underlined word, 44px tall to the thumb */
+.plate--clip, .pane__clip { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem 1.25rem; }
+.clip-toggle { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; margin: 0 -8px 0 0; padding: 0 8px; border: 0; border-radius: 0; background: none; color: inherit; font: inherit; line-height: 1.2; cursor: pointer;
+  text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.18em; text-decoration-color: currentColor;
+  transition: text-decoration-color var(--t-hover) ease, transform var(--t-press) var(--ease-out); }
+.clip-toggle[hidden] { display: none; }
+.clip-toggle:active { transform: scale(0.96); }
+.clip-toggle:focus-visible { outline-offset: -2px; }
+.plate--clip { padding-right: 0.5rem; }
+.plate--clip .clip-toggle { margin: -12px 0; }
+@media (hover: hover) and (pointer: fine) { .clip-toggle:hover { text-decoration-color: transparent; } }
+.plate__text.is-changing { opacity: 0; }
+
+/* the same pictures inside the column, for phones (and for desktops without script) */
+.pane { position: relative; margin: 2rem 0 2.25rem; }
+.pane__frame { position: relative; aspect-ratio: 4 / 5; overflow: clip; background: var(--surface); }
+.pane__frame > img, .pane__frame > video { width: 100%; height: 100%; object-fit: cover; }
+.pane figcaption, .postcard figcaption, .inset figcaption { margin-top: 0.6rem; font-size: var(--step-small); line-height: 1.4; color: var(--muted); }
+@media (min-width: 1000px) {
+  .js .pane { display: none; }
+  /* the clip plays in the window, but its caption and pause button stay in the column, right under the heading,
+     so Tab reaches the button in reading order (the copy on the window's plate is for the mouse) */
+  .js .rain .pane { display: block; margin: 1rem 0 0; }
+  .js .rain .pane__frame { display: none; }
+  .js .rain .pane__clip { justify-content: flex-start; margin-top: 0; }
+}
+
+/* ---------- the reading column ---------- */
+.chapter { padding: var(--section) var(--pad); }
+.chapter > h2, .sheet h2 { font-size: var(--step-head); }
+.chapter > h2 { max-width: 14em; }
+.measure { max-width: 46ch; }
+.measure > p + p { margin-top: 1em; }
+.strong { font-weight: 500; }
+
+/* chapter 2: the name, and the rain by month */
+.about__text { margin-top: 1.75rem; }
+.rainfall { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.rainfall__now { font-weight: 500; min-height: 1.5em; }
+.bars { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(4px, 0.9vw, 12px); align-items: end; height: clamp(170px, 18vw, 240px); margin-top: 1.25rem; }
+.bar { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+.bar i { display: block; height: calc(var(--mm) / 330 * 100%); background: var(--muted); transform-origin: bottom; transition: background-color var(--t-hover) ease; }
+.bar.is-now i { background: var(--accent); }
+.bar span { margin-top: 0.5rem; font-size: var(--step-small); line-height: 1.2; text-align: center; color: var(--muted); }
+.bar.is-now span { color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.25em; text-decoration-color: var(--accent); }
+.rainfall figcaption { margin-top: 1.25rem; max-width: 52ch; font-size: var(--step-small); line-height: 1.45; color: var(--muted); }
+
+/* chapter 3: the printed menu sheet on the darker ground, scalloped top and bottom */
+.menu { background: var(--surface); padding: calc(var(--section) * 0.8) 0; }
+.sheet { position: relative; width: min(600px, calc(100% - 2 * var(--pad))); margin: 0 auto; padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3.5rem) clamp(2.75rem, 5vw, 4rem); background: var(--paper); text-align: center; }
+.sheet::before, .sheet::after { content: ""; position: absolute; left: 0; right: 0; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='16'%3E%3Ccircle cx='12' cy='8' r='8' fill='%23dad5ca'/%3E%3C/svg%3E") left center / 24px 16px round no-repeat; }
+.sheet::before { top: -8px; }
+.sheet::after { bottom: -8px; }
+.sheet__note { margin: 1rem auto 0; max-width: 34ch; }
+.group { margin-top: clamp(2.5rem, 4.5vw, 3.5rem); }
+.group h3 { font-size: var(--step-lead); line-height: 1.2; }
+.dishes { margin: 1.25rem auto 0; max-width: 30em; text-align: left; }
+.dishes li { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.5rem; padding: 0.5rem 0; }
+.dish { font-weight: 500; }
+.price { font-weight: 500; font-variant-numeric: lining-nums tabular-nums; text-align: right; white-space: nowrap; }
+.desc { grid-column: 1; color: var(--muted); line-height: 1.4; }
+.inset { width: min(230px, 70%); margin: 1.75rem auto 0; }
+.inset__frame { aspect-ratio: 4 / 5; overflow: clip; background: var(--surface); }
+.inset__frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.sheet__hours { margin-top: clamp(2.5rem, 4.5vw, 3.5rem); font-weight: 500; }
+.menu .pane { width: min(600px, calc(100% - 2 * var(--pad))); margin: 3.5rem auto 0; }
+
+/* chapter 4: the receipt for the rain, on the one green field */
+.rain { background: var(--accent); color: var(--accent-ink); }
+.rain ::selection { background: var(--ink); color: var(--paper); }
+.rain .pane figcaption { color: var(--accent-ink); }
+.menu .pane figcaption { color: var(--ink); }
+.rain__text { margin-top: 1.5rem; max-width: 34ch; }
+.slip { width: min(470px, 100%); margin: clamp(2.5rem, 5vw, 3.5rem) 0 0 auto; padding: 1.75rem 1.75rem 2.75rem; background: var(--paper); color: var(--ink); font-variant-numeric: lining-nums tabular-nums;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 98.077% calc(100% - 10px), 96.154% 100%, 94.231% calc(100% - 10px), 92.308% 100%, 90.385% calc(100% - 10px), 88.462% 100%, 86.538% calc(100% - 10px), 84.615% 100%, 82.692% calc(100% - 10px), 80.769% 100%, 78.846% calc(100% - 10px), 76.923% 100%, 75% calc(100% - 10px), 73.077% 100%, 71.154% calc(100% - 10px), 69.231% 100%, 67.308% calc(100% - 10px), 65.385% 100%, 63.462% calc(100% - 10px), 61.538% 100%, 59.615% calc(100% - 10px), 57.692% 100%, 55.769% calc(100% - 10px), 53.846% 100%, 51.923% calc(100% - 10px), 50% 100%, 48.077% calc(100% - 10px), 46.154% 100%, 44.231% calc(100% - 10px), 42.308% 100%, 40.385% calc(100% - 10px), 38.462% 100%, 36.538% calc(100% - 10px), 34.615% 100%, 32.692% calc(100% - 10px), 30.769% 100%, 28.846% calc(100% - 10px), 26.923% 100%, 25% calc(100% - 10px), 23.077% 100%, 21.154% calc(100% - 10px), 19.231% 100%, 17.308% calc(100% - 10px), 15.385% 100%, 13.462% calc(100% - 10px), 11.538% 100%, 9.615% calc(100% - 10px), 7.692% 100%, 5.769% calc(100% - 10px), 3.846% 100%, 1.923% calc(100% - 10px), 0% 100%); }
+.slip__head { font-weight: 500; text-align: center; }
+.slip h3 { margin-top: 1.75rem; font-size: var(--step-body); font-weight: 500; line-height: 1.3; letter-spacing: 0; }
+.slip ul { margin-top: 0.4rem; }
+/* leaders run from the end of the last line to the time, however many lines the item takes:
+   the dots lie under the whole last line, the words and the time cover them with paper */
+.row { --row-x: 0px; --row-y: 0.2rem; position: relative; padding: var(--row-y) calc(var(--row-x) + 4.25em) var(--row-y) var(--row-x); line-height: 1.35; }
+.row__what { position: relative; z-index: 1; padding-right: 0.45em; background: var(--paper); }
+.row__dots { position: absolute; left: var(--row-x); right: var(--row-x); bottom: calc(var(--row-y) + 0.32em); height: 4px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Ccircle cx='2' cy='2' r='2' fill='%232a1d17'/%3E%3C/svg%3E") repeat-x left center / 8px 4px; }
+.row__time { position: absolute; z-index: 1; right: var(--row-x); bottom: var(--row-y); padding-left: 0.45em; background: var(--paper); white-space: nowrap; }
+.row--total { --row-x: 1.75rem; --row-y: 0.6rem; margin: 1.75rem -1.75rem 0; background: var(--ink); color: var(--paper); font-weight: 500; }
+.row--total .row__what, .row--total .row__time { background: var(--ink); }
+.row--total .row__dots { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Ccircle cx='2' cy='2' r='2' fill='%23ecebe6'/%3E%3C/svg%3E"); }
+.rain__legend { width: min(470px, 100%); margin: 1.5rem 0 0 auto; font-size: var(--step-body); }
+
+/* Georgian runs longer: a wider receipt, a gentler staircase of names */
+html[lang="ka"] .slip, html[lang="ka"] .rain__legend { width: min(540px, 100%); }
+@media (min-width: 600px) { html[lang="ka"] .street__names { grid-template-columns: minmax(0, 1fr) minmax(0, 0.45fr); } }
+html[lang="ka"] .names li { padding-left: calc(var(--i) * 0.35em); }
+
+/* chapter 5: the street of ten names */
+.street__intro { margin-top: 1.75rem; }
+.street__names { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr); column-gap: clamp(1rem, 3vw, 2.5rem); align-items: start; margin-top: 2rem; }
+.names { font-size: var(--step-lead); line-height: 1.3; }
+.names li { padding-left: calc(var(--i) * 0.55em); }
+.postcard { margin-top: 0.35rem; }
+.postcard__frame { aspect-ratio: 3 / 4; overflow: clip; background: var(--surface); }
+.postcard__frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: grayscale(1); }
+.street__after { margin-top: 2.25rem; }
+.statement { margin-top: clamp(2.5rem, 5vw, 3.5rem); max-width: 22em; font-size: var(--step-lead); line-height: 1.3; font-weight: 500; }
+
+/* ---------- chapter 6: how to find us, the system broken once (full width, chocolate) ---------- */
+.visit { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto auto; min-height: 100svh; padding: clamp(2.5rem, 6vh, 4rem) calc(var(--margin) + var(--pad)) clamp(1.5rem, 4vh, 2.5rem); background: var(--ink); color: var(--bg); }
+.visit ::selection { background: var(--bg); color: var(--ink); }
+/* the green ring disappears on chocolate and on green: bone instead (13:1 and 4.6:1) */
+.visit :focus-visible, .rain :focus-visible { outline-color: var(--bg); }
+.visit__top { max-width: 26em; }
+.visit h2 { font-size: var(--step-head); }
+.visit__top p { margin-top: 0.5rem; font-size: var(--step-lead); line-height: 1.3; }
+/* the walk, from what the page has already shown: the boulevard, the street on the 1913 plan, the awning */
+.route { grid-row: 2; align-self: center; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1.5rem, 4vw, 4rem); margin: clamp(2.5rem, 7vh, 5rem) 0; font-size: var(--step-body); line-height: 1.45; }
+.route__from { display: block; margin-bottom: 0.2rem; font-size: var(--step-lead); font-weight: 500; line-height: 1.25; }
+.address { grid-row: 3; margin-top: 2rem; font-size: min(8vw, var(--step-display)); line-height: 0.98; letter-spacing: -0.02em; white-space: nowrap; }
+.address__fit { display: inline-block; }
+/* Georgian letters hang deep below the line: give the stacked address and the link under it room */
+html[lang="ka"] .address { line-height: 1.12; }
+.visit__map { grid-row: 4; margin-top: 1.1rem; font-size: var(--step-lead); line-height: 1.3; }
+.visit__map a { display: inline-flex; align-items: center; min-height: 44px; }
+.visit__foot { grid-row: 5; display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-top: clamp(3rem, 12vh, 7rem); font-size: var(--step-body); line-height: 1.45; }
+.visit__foot p:last-child { text-align: right; }
+.visit__foot a, .visit__foot .contact { display: inline-block; padding: 0.1rem 0; }
+
+/* ---------- the footer: the awning returns, then one quiet line ---------- */
+.foot { padding: clamp(5rem, 14vh, 9rem) calc(var(--margin) + var(--pad)) 30px; }
+.foot__awning { height: 24px; background: var(--paper) var(--stripe) left top / 56px 100% round; }
+.foot__line { display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 1.5rem; margin-top: 1.5rem; font-size: var(--step-small); }
+.foot__what { color: var(--muted); }
+.foot__nav { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; }
+.foot__nav a, .foot__end a { display: inline-flex; align-items: center; min-height: 32px; }
+.foot__end { justify-self: end; color: var(--muted); }
+.foot__end a { margin-left: 1rem; color: var(--ink); }
+.credits { margin-top: 1rem; max-width: 75ch; font-size: var(--step-small); line-height: 1.5; }
+.credits a { text-decoration-line: underline; text-decoration-color: rgba(42, 29, 23, 0.35); }
+@media (hover: hover) and (pointer: fine) { .credits a:hover { text-decoration-color: currentColor; } }
+
+/* ---------- wide screens: the window stays, the column reads ---------- */
+@media (min-width: 1000px) {
+  .column { padding-bottom: 0; }
+  .street { padding-bottom: calc(var(--section) * 0.9); }
+}
+
+/* ---------- phones and tablets: the window becomes the top of the first screen ---------- */
+@media (max-width: 999px) {
+  :root { --window-h: 42svh; }
+  .stage { display: block; padding: var(--margin) var(--margin) 0; }
+  .opening { display: flex; flex-direction: column; }
+  .window { order: -1; align-self: stretch; position: sticky; top: var(--margin); height: var(--window-h); flex: none; }
+  .layer:not(.layer--live) { display: none; }
+  .plate { left: 12px; bottom: 36px; max-width: calc(100% - 24px); }
+  .plate--live { padding: 0.7rem 0.9rem 0.75rem; font-size: var(--step-body); line-height: 1.35; }
+  .card { margin-top: -24px; min-height: 0; }
+  .awning { height: 40px; }
+  .card__body { padding: 8px var(--pad) 28px; }
+  .langs { padding-top: 4px; }
+  .card__links { padding-bottom: 12px; }
+  .column { margin: 0 calc(-1 * var(--margin)); }
+  .chapter { padding: var(--section) calc(var(--margin) + var(--pad) - 16px); }
+  .menu { padding: var(--section) 0; }
+  .sheet { width: calc(100% - 20px); }
+  .menu .pane { width: auto; margin: 3rem var(--margin) 0; }
+  .visit { padding-inline: var(--margin); }
+  .foot { padding-inline: var(--margin); }
+}
+@media (max-width: 999px) and (min-width: 600px) {
+  :root { --window-h: 46svh; }
+  .card__body { padding-top: 16px; }
+  .chapter { padding-inline: clamp(2rem, 8vw, 5rem); }
+  .chapter > .measure, .chapter > h2, .rain__text { max-width: 36em; }
+  .pane__frame { aspect-ratio: 3 / 2; }
+  .menu .pane__frame img { scale: 1.03; } /* the colour fringe at the edges of the Prokudin-Gorsky plate stays outside the band */
+  .route { grid-template-columns: minmax(0, 1fr); row-gap: 1.25rem; max-width: 34em; }
+  .visit { min-height: 78svh; }
+}
+@media (max-width: 599px) {
+  .card__body .button { align-self: stretch; }
+  .wordmark { font-size: clamp(4rem, 19vw, 5rem); }
+  .lede { margin-top: 1rem; }
+  .card__body .button { margin-top: 1.5rem; }
+  .title { margin-top: 1.25rem; }
+  html[lang="ka"] .lede { margin-top: 1.25rem; }
+  .street__names { grid-template-columns: 1fr; row-gap: 2rem; }
+  .postcard { width: 62%; }
+  .names li { padding-left: calc(var(--i) * 0.4em); }
+  .bars { column-gap: 3px; }
+  .bar span { letter-spacing: -0.01em; }
+  .slip { padding: 1.5rem 1.15rem 2.5rem; }
+  .row--total { --row-x: 1.15rem; margin-inline: -1.15rem; }
+  .visit { min-height: 86svh; }
+  .route { grid-template-columns: minmax(0, 1fr); row-gap: 1.25rem; margin: 2.25rem 0 0.5rem; }
+  .address { font-size: 11.5vw; white-space: normal; }
+  .address__part { display: block; }
+  .visit__foot { flex-direction: column; align-items: start; gap: 12px; margin-top: 2.5rem; font-size: 15px; }
+  .visit__foot p:last-child { text-align: left; }
+  .foot { padding-top: 5.5rem; padding-bottom: 24px; }
+  .foot__line { grid-template-columns: 1fr; gap: 8px; }
+  .foot__nav { justify-content: start; }
+  .foot__end { justify-self: start; }
+  .foot__end a { margin-left: 0.75rem; }
+  .foot__nav a, .foot__end a { min-height: 44px; }
+}
+
+/* the narrowest phones: the Georgian title keeps to two lines */
+@media (max-width: 359px) { html[lang="ka"] .title { font-size: 1.5rem; } }
+
+/* short phones (375×667, 360×640): the window gives up a little height so the button stays on the first screen */
+@media (max-width: 599px) and (max-height: 720px) {
+  :root { --window-h: 29svh; }
+  .plate { bottom: 32px; }
+  .plate--live { padding: 0.55rem 0.8rem 0.6rem; font-size: var(--step-small); line-height: 1.35; }
+  .awning { height: 32px; }
+  .langs a { min-height: 32px; }
+  .wordmark { font-size: 3.75rem; }
+  .wordmark-ka { margin-top: 0.15rem; }
+  .title { margin-top: 0.9rem; }
+  .lede { margin-top: 0.75rem; }
+  .card__body .button { margin-top: 1.1rem; }
+}
+
+/* the shortest phones (320×568): a lower window keeps the button on the first screen */
+@media (max-width: 599px) and (max-height: 600px) {
+  :root { --window-h: 24svh; }
+  .awning { height: 24px; }
+  .wordmark { font-size: 3.25rem; }
+  .title { margin-top: 0.6rem; }
+  .card__body .button { margin-top: 0.9rem; }
+  html[lang="ka"] .title { margin-top: 0.9rem; }
+}
+
+/* ---------- motion (content is visible without script and under reduced motion) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  /* load: the name, then the title line by line, then the sentence and the action; the window settles */
+  .js .card [data-load] { opacity: 0; transform: translateY(18px); animation: rise 700ms var(--ease-out) forwards; animation-delay: var(--d, 0ms); }
+  .js .title .line { overflow: clip; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+  .js .title .line > span { display: block; transform: translateY(105%); animation: line-up 900ms var(--ease-expo) forwards; animation-delay: calc(180ms + var(--i) * 100ms); }
+  .js .awning { transform: scaleY(0); transform-origin: top; animation: awning 800ms var(--ease-out) 60ms forwards; }
+  .js .layer.is-on .layer__media { animation: settle 1800ms var(--ease-soft) both; }
+  .js .plate--live { opacity: 0; animation: fade 700ms ease 700ms forwards; }
+
+  /* chapters: heading, then text, then picture, staggered, once */
+  .js [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+  .js .bars .bar i { transform: scaleY(0.04); transition: transform 900ms var(--ease-expo), background-color var(--t-hover) ease; transition-delay: calc(var(--n) * 45ms); }
+  .js .bars.is-in .bar i { transform: none; }
+  .js .names li { opacity: 0; transform: translateX(-14px); transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out); transition-delay: calc(var(--i) * 60ms); }
+  .js .names.is-in li { opacity: 1; transform: none; }
+  .js .slip .row { opacity: 0; transform: translateY(10px); transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--n, 0) * 70ms + 200ms); }
+  .js .slip.is-in .row { opacity: 1; transform: none; }
+  /* pictures in the column are never hidden: they settle from a slight scale as they arrive */
+  .js .shutter[data-reveal] { opacity: 1; transform: none; }
+  .js .shutter img, .js .shutter video { transform: scale(1.08); transition: transform 1600ms var(--ease-soft); }
+  .js .shutter.is-in img, .js .shutter.is-in video { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .layer, .layer.is-on, .shot, .plate__text { transition: none; }
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes line-up { to { transform: none; } }
+@keyframes awning { to { transform: none; } }
+@keyframes settle { from { transform: scale(1.06); } to { transform: none; } }
+@keyframes fade { to { opacity: 1; } }
